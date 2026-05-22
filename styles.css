@@ -221,11 +221,11 @@ p { margin-top: 0; }
    -------------------------------------------------------- */
 .hero {
   position: relative;
-  min-height: calc(100svh - var(--header-h) - 56px);
+  min-height: calc(100svh - var(--header-h));
   overflow: hidden;
   display: grid;
   align-items: center;
-  padding: clamp(52px, 7vw, 100px) var(--gutter);
+  padding: clamp(72px, 8vw, 118px) var(--gutter) clamp(96px, 10vw, 150px);
   background: var(--ocean);
 }
 
@@ -546,8 +546,7 @@ h3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
-  margin: 0 var(--gutter);
-  transform: translateY(-28px);
+  margin: clamp(26px, 4vw, 54px) var(--gutter) 0;
 }
 
 .strip-item {
@@ -1727,8 +1726,8 @@ h3 {
 
   /* Hero */
   .hero {
-    min-height: calc(100svh - var(--header-h) - 72px);
-    padding: 36px 18px;
+    min-height: auto;
+    padding: 36px 18px 70px;
   }
 
   .hero-content {
@@ -1787,7 +1786,7 @@ h3 {
   .problem-strip {
     grid-template-columns: 1fr;
     margin-inline: 18px;
-    transform: translateY(-18px);
+    margin-top: 22px;
   }
 
   /* Benefit & step grids */
