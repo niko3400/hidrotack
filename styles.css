@@ -788,8 +788,31 @@ h3 {
   transform: scale(1.06);
 }
 
-.under-counter-photo { background: #D4DFE9; }
-.counter-top-photo   { background: #DAE5EE; }
+.over-counter-photo { background: #D4DFE9; }
+.under-counter-photo { background: #DAE5EE; }
+
+.under-counter-photo img {
+  object-position: center;
+}
+
+.equipment-location {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 2;
+  padding: 9px 13px;
+  color: var(--ocean);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(4, 13, 24, 0.14);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
+}
 
 .equipment-copy {
   padding: 26px 28px 30px;
@@ -1566,6 +1589,21 @@ h3 {
 .service-photo {
   height: clamp(200px, 22vw, 300px);
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.service-photo figcaption {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  padding: 9px 13px;
+  color: var(--ocean);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  font: 900 0.72rem/1 var(--font-body);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
 }
 
 /* Assurance — imagen encima del texto en columna derecha */
