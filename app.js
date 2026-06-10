@@ -8,6 +8,9 @@ const nav        = document.querySelector(".site-nav");
 const navLinks   = document.querySelectorAll(".site-nav a");
 const form       = document.querySelector(".contact-form");
 const statusNote = document.querySelector(".form-note");
+const formLoadedAt = Date.now();
+const minimumCompletionTime = 3000;
+const submissionCooldown = 60 * 1000;
 
 /* ----------------------------------------------------------
    MENÚ MÓVIL
@@ -33,7 +36,16 @@ document.addEventListener("keydown", (event) => {
 /* ----------------------------------------------------------
    FORMULARIO DE CONTACTO
    ---------------------------------------------------------- */
-form.addEventListener("submit", async (event) => {
+const query = new URLSearchParams(window.location.search);
+
+if (query.get("consulta") === "enviada") {
+  statusNote.textContent =
+    "Recibimos tu consulta. Te contactaremos para coordinar el asesoramiento.";
+  statusNote.className = "form-note success";
+  window.history.replaceState({}, "", `${window.location.pathname}#contacto`);
+}
+
+form.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const fields = [...form.querySelectorAll("input")];
@@ -52,38 +64,33 @@ form.addEventListener("submit", async (event) => {
     return;
   }
 
-  const button = form.querySelector('button[type="submit"]');
-  const originalButtonText = button.textContent;
-  const name = form.elements.nombre.value.trim().split(" ")[0] || "Gracias";
+  if (form.elements._honey.value || Date.now() - formLoadedAt < minimumCompletionTime) {
+    statusNote.textContent =
+      "No pudimos validar el envío. Esperá unos segundos e intentá nuevamente.";
+    statusNote.className = "form-note error";
+    return;
+  }
 
+  const lastSubmission = Number(sessionStorage.getItem("hidrotack-last-submission") || 0);
+
+  if (Date.now() - lastSubmission < submissionCooldown) {
+    statusNote.textContent =
+      "La consulta ya fue enviada. Esperá un minuto antes de volver a intentarlo.";
+    statusNote.className = "form-note error";
+    return;
+  }
+
+  const button = form.querySelector('button[type="submit"]');
   button.disabled = true;
-  button.textContent = "Enviando consulta...";
-  statusNote.textContent = "";
+  button.textContent = "Verificando...";
+  statusNote.textContent = "Completá la verificación de seguridad para enviar tu consulta.";
   statusNote.className = "form-note";
 
-  try {
-    const response = await fetch(form.action, {
-      method: "POST",
-      body: new FormData(form),
-      headers: { Accept: "application/json" },
-    });
-    const result = await response.json();
-
-    if (!response.ok || result.success === "false") {
-      throw new Error("No se pudo enviar la consulta");
-    }
-
-    statusNote.textContent = `${name}, recibimos tu consulta. Te contactaremos para coordinar el asesoramiento.`;
-    statusNote.className = "form-note success";
-    form.reset();
-  } catch (error) {
-    statusNote.textContent =
-      "No pudimos enviar la consulta. Escribinos a consultas@hidrotack.com.";
-    statusNote.className = "form-note error";
-  } finally {
-    button.disabled = false;
-    button.textContent = originalButtonText;
-  }
+  const returnUrl =
+    `${window.location.origin}${window.location.pathname}?consulta=enviada#contacto`;
+  form.elements._next.value = returnUrl;
+  sessionStorage.setItem("hidrotack-last-submission", String(Date.now()));
+  form.submit();
 });
 
 /* ----------------------------------------------------------

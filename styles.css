@@ -1515,6 +1515,15 @@ h3 {
   transform: none;
 }
 
+.form-security {
+  grid-column: 1 / -1;
+  margin: -4px 0 0;
+  color: var(--subtle);
+  font-size: 0.74rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
 .form-note {
   min-height: 20px;
   margin: 0;
