@@ -87,7 +87,12 @@
           </ul>
           <dl class="hero-cert-seals" aria-label="Sellos y certificaciones destacadas">
             <div>
-              <dt><span class="seal-mark seal-mark--nsf">NSF<span>58</span></span></dt>
+              <dt>
+                <span class="seal-mark seal-mark--nsf">
+                  <span class="seal-main">NSF</span>
+                  <span class="seal-code">58</span>
+                </span>
+              </dt>
               <dd>Membrana RO certificada</dd>
             </div>
             <div>
@@ -95,7 +100,12 @@
               <dd>Equipo completo</dd>
             </div>
             <div>
-              <dt><span class="seal-mark seal-mark--rohs">RoHS<span>CB</span></span></dt>
+              <dt>
+                <span class="seal-mark seal-mark--rohs">
+                  <span class="seal-main">RoHS</span>
+                  <span class="seal-code">CB</span>
+                </span>
+              </dt>
               <dd>Componentes eléctricos</dd>
             </div>
           </dl>
@@ -644,7 +654,15 @@
           </ul>
         </div>
 
-        <form class="contact-form" action="#" method="post" novalidate>
+        <form
+          class="contact-form"
+          action="https://formsubmit.co/ajax/consultas@hidrotack.com"
+          method="post"
+          novalidate
+        >
+          <input type="hidden" name="_subject" value="Nueva consulta de alquiler desde Hidrotack.com" />
+          <input type="hidden" name="_template" value="table" />
+          <input class="form-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" />
           <div class="form-row">
             <label for="nombre">Nombre</label>
             <input id="nombre" name="nombre" type="text" autocomplete="name" placeholder="Tu nombre completo" required />
@@ -659,7 +677,7 @@
           </div>
           <div class="form-row">
             <label for="correo">Correo electrónico</label>
-            <input id="correo" name="correo" type="email" autocomplete="email" placeholder="tu@correo.com" required />
+            <input id="correo" name="email" type="email" autocomplete="email" placeholder="tu@correo.com" required />
           </div>
           <button class="button button--primary form-button" type="submit">Solicitar alquiler del equipo</button>
           <p class="form-note" role="status" aria-live="polite"></p>
@@ -677,6 +695,7 @@
         <div>
           <strong>Hidrotack S.A.</strong>
           <p>Equipos de ósmosis inversa en alquiler mensual, sin depender de bidones.</p>
+          <a class="footer-email" href="mailto:consultas@hidrotack.com">consultas@hidrotack.com</a>
         </div>
       </div>
       <p class="footer-copy">© 2026 Hidrotack S.A. Todos los derechos reservados.</p>

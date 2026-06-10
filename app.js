@@ -33,13 +33,16 @@ document.addEventListener("keydown", (event) => {
 /* ----------------------------------------------------------
    FORMULARIO DE CONTACTO
    ---------------------------------------------------------- */
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const fields = [...form.querySelectorAll("input")];
-  const invalid = fields.filter((f) => !f.checkValidity());
+  const requiredFields = fields.filter((field) => field.required);
+  const invalid = requiredFields.filter((field) => !field.checkValidity());
 
-  fields.forEach((f) => f.classList.toggle("is-invalid", !f.checkValidity()));
+  requiredFields.forEach((field) => {
+    field.classList.toggle("is-invalid", !field.checkValidity());
+  });
 
   if (invalid.length) {
     invalid[0].focus();
@@ -49,11 +52,38 @@ form.addEventListener("submit", (event) => {
     return;
   }
 
-  const name =
-    form.elements.nombre.value.trim().split(" ")[0] || "Gracias";
-  statusNote.textContent = `${name}, tu solicitud quedó lista. Te contactaremos para coordinar el asesoramiento.`;
-  statusNote.className = "form-note success";
-  form.reset();
+  const button = form.querySelector('button[type="submit"]');
+  const originalButtonText = button.textContent;
+  const name = form.elements.nombre.value.trim().split(" ")[0] || "Gracias";
+
+  button.disabled = true;
+  button.textContent = "Enviando consulta...";
+  statusNote.textContent = "";
+  statusNote.className = "form-note";
+
+  try {
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { Accept: "application/json" },
+    });
+    const result = await response.json();
+
+    if (!response.ok || result.success === "false") {
+      throw new Error("No se pudo enviar la consulta");
+    }
+
+    statusNote.textContent = `${name}, recibimos tu consulta. Te contactaremos para coordinar el asesoramiento.`;
+    statusNote.className = "form-note success";
+    form.reset();
+  } catch (error) {
+    statusNote.textContent =
+      "No pudimos enviar la consulta. Escribinos a consultas@hidrotack.com.";
+    statusNote.className = "form-note error";
+  } finally {
+    button.disabled = false;
+    button.textContent = originalButtonText;
+  }
 });
 
 /* ----------------------------------------------------------

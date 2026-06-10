@@ -476,8 +476,10 @@ h3 {
 
 .seal-mark {
   position: relative;
-  display: inline-grid;
-  place-items: center;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 82px;
   aspect-ratio: 1;
   color: var(--white);
@@ -511,13 +513,29 @@ h3 {
   border-color: rgba(0, 194, 203, 0.42);
 }
 
-.seal-mark span {
+.seal-mark .seal-main,
+.seal-mark .seal-code {
+  position: relative;
+  z-index: 1;
   display: block;
-  margin-top: 2px;
   font-family: var(--font-body);
-  font-size: 0.66rem;
   font-weight: 900;
-  letter-spacing: 0.12em;
+  line-height: 0.9;
+  text-align: center;
+}
+
+.seal-mark .seal-main {
+  position: absolute;
+  top: 17px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.seal-mark .seal-code {
+  margin-top: 0;
+  font-family: var(--font-display);
+  font-size: 1.66rem;
+  letter-spacing: 0;
 }
 
 .seal-mark--ce {
@@ -527,6 +545,14 @@ h3 {
 
 .seal-mark--rohs {
   font-size: 1.02rem;
+}
+
+.seal-mark--rohs .seal-main {
+  font-size: 0.66rem;
+}
+
+.seal-mark--rohs .seal-code {
+  font-size: 1.72rem;
 }
 
 .hero-cert-seals dd {
@@ -1423,6 +1449,16 @@ h3 {
   box-shadow: var(--shadow-xl);
 }
 
+.form-honeypot {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 .form-row { display: grid; gap: 7px; }
 
 .form-row label {
@@ -1471,6 +1507,12 @@ h3 {
 
 .form-button:hover {
   box-shadow: 0 14px 38px rgba(0, 194, 203, 0.46) !important;
+}
+
+.form-button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
 }
 
 .form-note {
@@ -1523,6 +1565,18 @@ h3 {
   color: rgba(255, 255, 255, 0.4);
   font-size: 0.8rem;
   line-height: 1.5;
+}
+
+.footer-email {
+  display: inline-block;
+  margin-top: 5px;
+  color: var(--cyan);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.footer-email:hover {
+  color: var(--white);
 }
 
 .footer-copy {
