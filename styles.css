@@ -519,40 +519,39 @@ h3 {
   z-index: 1;
   display: block;
   font-family: var(--font-body);
-  font-weight: 900;
-  line-height: 0.9;
+  font-weight: 800;
+  line-height: 1;
   text-align: center;
 }
 
 .seal-mark .seal-main {
-  position: absolute;
-  top: 17px;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
 }
 
 .seal-mark .seal-code {
-  margin-top: 0;
-  font-family: var(--font-display);
-  font-size: 1.66rem;
-  letter-spacing: 0;
-}
-
-.seal-mark--ce {
-  font-size: 1.7rem;
+  margin-top: 3px;
+  font-size: 1.08rem;
   letter-spacing: 0.03em;
 }
 
+.seal-mark--ce {
+  font-family: var(--font-body);
+  font-size: 1.08rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
 .seal-mark--rohs {
-  font-size: 1.02rem;
+  font-size: 1rem;
 }
 
 .seal-mark--rohs .seal-main {
-  font-size: 0.66rem;
+  font-size: 0.72rem;
 }
 
 .seal-mark--rohs .seal-code {
-  font-size: 1.72rem;
+  font-size: 1.08rem;
 }
 
 .hero-cert-seals dd {
